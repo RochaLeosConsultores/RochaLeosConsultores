@@ -2,7 +2,7 @@ import { Button } from "../../ui/button";
 
 export function HeroNosotros() {
   return (
-    <section className="relative h-screen w-full bg-[#0e1a2b] overflow-hidden">
+    <section className="relative min-h-screen w-full bg-[#0e1a2b] overflow-hidden">
       {/* Elementos decorativos de fondo sutiles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#1F3A5F]/20 rounded-full blur-3xl"></div>
@@ -29,25 +29,6 @@ export function HeroNosotros() {
               En Rocha Leos Consultores ayudamos a empresas del sector privado y público a tener información financiera clara, cumplir con sus obligaciones contables, fiscales y laborales, y tomar mejores decisiones para proteger y hacer crecer su negocio.
             </p>
 
-            {/* Lista de highlights/badges */}
-            <div className="flex flex-wrap gap-3 md:gap-4 pt-4">
-              <div className="inline-flex items-center px-4 py-2.5 bg-[#1F3A5F]/50 border border-[#BFC5CA]/20 rounded-lg backdrop-blur-sm hover:border-[#BFC5CA]/40 transition-colors">
-                <span className="text-sm md:text-base text-[#BFC5CA] whitespace-nowrap">
-                  Desde 2008 acompañando a nuestros clientes
-                </span>
-              </div>
-              <div className="inline-flex items-center px-4 py-2.5 bg-[#1F3A5F]/50 border border-[#BFC5CA]/20 rounded-lg backdrop-blur-sm hover:border-[#BFC5CA]/40 transition-colors">
-                <span className="text-sm md:text-base text-[#BFC5CA] whitespace-nowrap">
-                  Registro REPSE vigente
-                </span>
-              </div>
-              <div className="inline-flex items-center px-4 py-2.5 bg-[#1F3A5F]/50 border border-[#BFC5CA]/20 rounded-lg backdrop-blur-sm hover:border-[#BFC5CA]/40 transition-colors">
-                <span className="text-sm md:text-base text-[#BFC5CA] whitespace-nowrap">
-                  Certificación CÍRCULO
-                </span>
-              </div>
-            </div>
-
             {/* CTA secundario */}
             <div className="pt-4">
               <Button 
@@ -59,6 +40,7 @@ export function HeroNosotros() {
               </Button>
             </div>
           </div>
+          
 
           {/* Columna derecha: Imagen institucional */}
           <div className="relative order-1 lg:order-2">
@@ -98,6 +80,12 @@ export function HeroNosotros() {
             <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-[#1F3A5F]/30 rounded-2xl blur-xl"></div>
           </div>
         </div>
+      </div>
+        {/* Bottom wave */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+          <path d="M0 100V60C480 20 960 80 1440 40V100H0Z" fill="white"/>
+        </svg>
       </div>
     </section>
   );

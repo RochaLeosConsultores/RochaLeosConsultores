@@ -1,39 +1,34 @@
 // src/components/inicio/cta.tsx
-import { FaWhatsapp } from "react-icons/fa";
 
 /**
  * CTA - Contacto
  * - Split layout: mitad blanca / mitad azul (#1D3C5B)
- * - Título grande, texto de apoyo y botón WhatsApp
+ * - Título grande, texto de apoyo y botón a página de contacto
  * - React + Vite + TSX + TailwindCSS
  *
  * Uso:
  * <CTA />                             // usa valores por defecto
- * <CTA phone="521234567890" />        // con lada país + número, sin signos
- * <CTA 
+ * <CTA contactHref="/contacto" />     // con ruta personalizada
+ * <CTA
  *   title="Tu título personalizado"
  *   description="Tu descripción personalizada"
  *   buttonText="Texto del botón"
- *   whatsappMessage="Mensaje de WhatsApp"
  * />
  */
 
 type Props = {
-  phone?: string; // E.g. "521234567890" (México: 52 + 10 dígitos)
+  contactHref?: string; // Ruta a la página de contacto, e.g. "/contacto"
   title?: string; // Título principal
   description?: string; // Texto descriptivo
   buttonText?: string; // Texto del botón
-  whatsappMessage?: string; // Mensaje predefinido para WhatsApp
 };
 
-export default function CTA({ 
-  phone = "524775770379",
+export default function CTA({
+  contactHref = "/contacto",
   title = "¿Necesitas asesoría contable, fiscal o auditoría?",
-  description = "Nuestro equipo te atiende directamente por WhatsApp para resolver dudas, brindarte soporte y ayudarte a elegir el servicio adecuado.",
-  buttonText = "Hablar por WhatsApp",
-  whatsappMessage = "Hola, necesito asesoría. ¿Me pueden apoyar?"
+  description = "Nuestro equipo te atiende directamente para resolver dudas, brindarte soporte y ayudarte a elegir el servicio adecuado.",
+  buttonText = "Contactar"
 }: Props) {
-  const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <section className="relative w-full py-12 md:py-16 px-4">
@@ -61,9 +56,7 @@ export default function CTA({
 
             <div className="mt-6">
               <a
-                href={waLink}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={contactHref}
                 className="
                   inline-flex items-center gap-2 rounded-xl
                   bg-white/95 backdrop-blur-sm text-[#1D3C5B]
@@ -72,7 +65,6 @@ export default function CTA({
                   hover:bg-white transition-all hover:shadow-xl
                 "
               >
-                <FaWhatsapp className="h-5 w-5" />
                 {buttonText}
               </a>
             </div>
