@@ -2,7 +2,7 @@ import { Button } from "../../ui/button";
 
 export function HeroNosotros() {
   return (
-    <section className="relative min-h-screen w-full bg-[#0e1a2b] overflow-hidden">
+    <section className="relative min-h-screen w-full bg-[#0e1a2b] overflow-hidden pt-16">
       {/* Elementos decorativos de fondo sutiles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#1F3A5F]/20 rounded-full blur-3xl"></div>

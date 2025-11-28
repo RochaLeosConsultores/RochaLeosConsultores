@@ -20,6 +20,7 @@ export function Navbar() {
   const [isServiciosOpen, setIsServiciosOpen] = useState(false);
   const [isMobileServiciosOpen, setIsMobileServiciosOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +30,18 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Prevent body scroll cuando el menu móvil está abierto
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -41,6 +54,25 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Cerrar menu móvil al hacer click fuera
+  useEffect(() => {
+    const handleClickOutsideMobileMenu = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutsideMobileMenu);
+      return () => document.removeEventListener("mousedown", handleClickOutsideMobileMenu);
+    }
+  }, [isMobileMenuOpen]);
+
+  // Cerrar menu móvil al navegar
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
   const navLinks = [
     { name: "Inicio", path: "/" },
     { name: "Nosotros", path: "/nosotros" },
@@ -51,6 +83,7 @@ export function Navbar() {
 
   return (
     <nav
+      ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-[#0e1a2b]/80 backdrop-blur-lg shadow-lg"
@@ -258,14 +291,13 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <Button
-                variant="secondary"
-                href="/contacto"
-                className="border-white text-white hover:bg-white hover:text-[#1F3A5F] w-full mt-2"
+              <Link
+                to="/contacto"
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full mt-2 px-4 py-3 rounded-lg border border-white text-white text-center font-medium transition-colors duration-200 hover:bg-white hover:text-[#1F3A5F]"
               >
                 Contacto
-              </Button>
+              </Link>
             </div>
               </div>
             </motion.div>
