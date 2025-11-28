@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router";
 import { Button } from "../ui/button";
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const serviciosLinks = [
   { name: "Contabilidad General", path: "/servicios/contabilidad-general" },
@@ -179,8 +180,16 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-white/20">
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="p-4 mb-4 border-t border-white/20 bg-[#0e1a2b] rounded-lg">
             <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <Link
@@ -216,27 +225,37 @@ export function Navbar() {
                   </svg>
                 </button>
 
-                {isMobileServiciosOpen && (
-                  <div className="ml-4 mt-2 space-y-1 border-l-2 border-white/20 pl-4">
-                    {serviciosLinks.map((link) => (
-                      <Link
-                        key={link.path}
-                        to={link.path}
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileServiciosOpen(false);
-                        }}
-                        className={`block text-sm text-white/80 font-medium py-2 px-3 rounded-lg transition-colors ${
-                          isActive(link.path)
-                            ? "bg-white/20 text-white"
-                            : "hover:bg-white/10 hover:text-white"
-                        }`}
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {isMobileServiciosOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="ml-4 mt-2 space-y-1 border-l-2 border-white/20 pl-4">
+                        {serviciosLinks.map((link) => (
+                          <Link
+                            key={link.path}
+                            to={link.path}
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setIsMobileServiciosOpen(false);
+                            }}
+                            className={`block text-sm text-white/80 font-medium py-2 px-3 rounded-lg transition-colors ${
+                              isActive(link.path)
+                                ? "bg-white/20 text-white"
+                                : "hover:bg-white/10 hover:text-white"
+                            }`}
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <Button
@@ -248,8 +267,10 @@ export function Navbar() {
                 Contacto
               </Button>
             </div>
-          </div>
-        )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
