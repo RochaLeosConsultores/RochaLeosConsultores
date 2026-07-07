@@ -9,8 +9,8 @@ export default function Nosotros() {
     <div>
       <HeroNosotros />
       <QuienesSomos />
-      <Filosofia />
       <PerfilesRochaLeos />
+      <Filosofia />
       <EquipoMultidisciplinario />
     </div>
   );
