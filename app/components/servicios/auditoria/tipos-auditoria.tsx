@@ -80,6 +80,16 @@ const tiposAuditoria = [
       </svg>
     ),
   },
+  {
+    title: "Dictámenes del Seguro Social",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo sed arcu facilisis dictum.",
+    color: "from-slate-500 to-slate-600",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12.75L11.25 15 15 9.75M12 3l7 4v5c0 4.418-2.985 8.166-7 9.289C7.985 20.166 5 16.418 5 12V7l7-4z" />
+      </svg>
+    ),
+  },
 ];
 
 export function TiposAuditoria() {
@@ -148,4 +158,3 @@ export function TiposAuditoria() {
     </section>
   );
 }
-

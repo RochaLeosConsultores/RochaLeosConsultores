@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const serviciosLinks = [
+  { name: "Todos los servicios", path: "/servicios" },
   { name: "Contabilidad General", path: "/servicios/contabilidad-general" },
   { name: "Asesoría Fiscal", path: "/servicios/asesoria-fiscal" },
   { name: "Auditoría", path: "/servicios/auditoria" },

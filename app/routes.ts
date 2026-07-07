@@ -4,6 +4,9 @@ export default [
   index("routes/home.tsx"),
   route("nosotros", "routes/nosotros.tsx"),
   route("contacto", "routes/contacto.tsx"),
+  route("privacidad", "routes/privacidad.tsx"),
+  route("terminos", "routes/terminos.tsx"),
+  route("servicios", "routes/servicios.tsx"),
   // Servicios subpages
   route("servicios/contabilidad-general", "routes/servicios/contabilidad-general.tsx"),
   route("servicios/asesoria-fiscal", "routes/servicios/asesoria-fiscal.tsx"),

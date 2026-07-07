@@ -51,15 +51,16 @@ const Certificaciones: React.FC = () => {
           <article className="flex flex-col overflow-hidden rounded-3xl bg-white text-slate-50 shadow-lg">
             <div className="flex flex-1 flex-col px-6 pt-6 pb-4 md:px-8 md:pt-8">
               <span className="inline-flex w-fit rounded-full bg-slate-900/40 px-3 py-1 text-xs font-medium text-slate-200">
-                Solvencia y confianza
+                Red de proveedores
               </span>
               <h3 className="mt-4 text-2xl font-semibold md:text-2xl text-black">
-                Círculo de Crédito
+                Círculo de Proveedores
               </h3>
                 <p className="mt-3 text-sm leading-relaxed text-black md:text-sm">
-                Nuestra firma se encuentra en buen estado ante las sociedades
-                de información crediticia, lo que brinda certeza y respaldo
-                financiero a nuestros clientes.
+                Formamos parte de Círculo de Proveedores, ecosistema que
+                valida información legal, financiera, crediticia y operativa
+                para fortalecer cadenas de suministro, agilizar procesos de
+                onboarding y reducir riesgos comerciales.
               </p>
             </div>
 
@@ -68,7 +69,7 @@ const Certificaciones: React.FC = () => {
               <div className="relative h-56 w-full overflow-hidden rounded-t-3xl md:h-60">
                 <img
                   src="/home-imgs/certificaciones/certificacion2.png"
-                  alt="Reporte ante Círculo de Crédito"
+                  alt="Reporte ante Círculo de Proveedores"
                   className="h-full w-full object-contain bg-white p-8"
                 />
               </div>

@@ -1,4 +1,5 @@
 // src/components/inicio/cta.tsx
+import { Link } from "react-router";
 
 /**
  * CTA - Contacto
@@ -55,8 +56,8 @@ export default function CTA({
             </p>
 
             <div className="mt-6">
-              <a
-                href={contactHref}
+              <Link
+                to={contactHref}
                 className="
                   inline-flex items-center gap-2 rounded-xl
                   bg-white/95 backdrop-blur-sm text-[#1D3C5B]
@@ -66,7 +67,7 @@ export default function CTA({
                 "
               >
                 {buttonText}
-              </a>
+              </Link>
             </div>
 
             {/* Decoración sutil */}

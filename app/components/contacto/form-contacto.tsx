@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FaFacebookF, FaEnvelope, FaPlus, FaInstagram } from 'react-icons/fa';
+import { Link } from 'react-router';
+import { FaEnvelope, FaPlus } from 'react-icons/fa';
 
 const ContactComponent = () => {
   const [formData, setFormData] = useState({
@@ -30,8 +31,23 @@ const ContactComponent = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Formulario enviado:', formData);
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      alert('Completa nombre, correo y mensaje antes de enviar.');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      alert('Ingresa un correo electronico valido.');
+      return;
+    }
+
     alert('Mensaje enviado correctamente. Nos pondremos en contacto contigo.');
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+      interests: [],
+    });
   };
 
   const faqItems = [
@@ -149,20 +165,19 @@ const ContactComponent = () => {
               <p className="text-[#FCFEFE] font-semibold mb-4">
                 contacto@rochaleosconsultores.com
               </p>
-              <div className="flex items-center gap-4">
-                <span className="text-[#BFC5CA] text-sm">O síguenos en</span>
-                <button
-                  type="button"
-                  className="bg-[#FCFEFE] hover:bg-[#BFC5CA] p-3 rounded-lg transition-colors"
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="mailto:contacto@rochaleosconsultores.com"
+                  className="inline-flex items-center justify-center rounded-lg bg-[#FCFEFE] px-4 py-3 text-sm font-semibold text-[#1F3A5F] transition-colors hover:bg-[#BFC5CA]"
                 >
-                  <FaFacebookF className="text-[#1F3A5F]" />
-                </button>
-                <button
-                  type="button"
-                  className="bg-[#FCFEFE] hover:bg-[#BFC5CA] p-3 rounded-lg transition-colors"
+                  Enviar correo
+                </a>
+                <Link
+                  to="/servicios"
+                  className="inline-flex items-center justify-center rounded-lg border border-[#FCFEFE] px-4 py-3 text-sm font-semibold text-[#FCFEFE] transition-colors hover:bg-[#FCFEFE] hover:text-[#1F3A5F]"
                 >
-                  <FaInstagram className="text-[#1F3A5F]" />
-                </button>
+                  Ver servicios
+                </Link>
               </div>
             </div>
 
@@ -250,6 +265,7 @@ const ContactComponent = () => {
               </div>
 
               <button
+                type="button"
                 onClick={handleSubmit}
                 className="w-full bg-[#1F3A5F] hover:bg-[#0e1a2b] text-[#FCFEFE] font-semibold py-3 rounded-lg transition-colors"
               >
