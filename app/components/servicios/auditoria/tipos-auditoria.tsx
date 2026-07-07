@@ -110,22 +110,11 @@ export function TiposAuditoria() {
         </div>
 
         {/* Bento grid layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto auto-rows-fr">
-          {tiposAuditoria.map((tipo, index) => {
-            // Balanced layout: element 0 spans 2 rows for visual balance
-            // Elements 6 and 7 are the same small size
-            // This creates: [0(2rows), 1, 2] [0(cont), 3, 4] [5, 6, 7]
-            const getRowSpan = () => {
-              if (index === 0) {
-                return 'lg:row-span-2';
-              }
-              return '';
-            };
-            
-            return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-3 gap-4 max-w-7xl mx-auto auto-rows-fr">
+          {tiposAuditoria.map((tipo, index) => (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-3xl bg-gray-50 p-8 transition-all duration-500 hover:shadow-2xl ${getRowSpan()}`}
+                className="group relative min-h-[18rem] overflow-hidden rounded-3xl bg-gray-50 p-8 transition-all duration-500 hover:shadow-2xl"
               >
                 {/* Gradient background on hover */}
                 <div className="absolute inset-0 bg-[#1F3A5F] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -151,8 +140,7 @@ export function TiposAuditoria() {
                 {/* Corner decoration */}
                 <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
-            );
-          })}
+            ))}
         </div>
       </div>
     </section>
