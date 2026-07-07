@@ -81,8 +81,8 @@ const tiposAuditoria = [
     ),
   },
   {
-    title: "Dictámenes del Seguro Social",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo sed arcu facilisis dictum.",
+    title: "Auditoría Fiscal IMSS e INFONAVIT",
+    description: "Revisión de cuotas, nómina, riesgos, contratos, prestaciones y controles para prevenir contingencias.",
     color: "from-slate-500 to-slate-600",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">

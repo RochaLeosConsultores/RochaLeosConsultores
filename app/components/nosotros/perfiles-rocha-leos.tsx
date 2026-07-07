@@ -1,17 +1,25 @@
 const perfiles = [
   {
-    nombre: "Raúl",
-    rol: "Rocha Leos Consultores",
-    iniciales: "R",
-    descripcion:
-      "Perfil en desarrollo. Proximamente se agregara el nombre completo, especialidad y trayectoria profesional.",
+    nombre: "Mtro., C.P. y M.F. Raúl Rocha Lozano",
+    rol: "Socio de Asesoría Fiscal, Nómina y RH, Contabilidad General, Cumplimiento Fiscal y Trámites Legales",
+    foto: "/home-imgs/perfiles/raul.jpg",
+    descripcion: [
+      "Contador Público con más de treinta y dos años de experiencia profesional en asesoría fiscal, implementación de sistemas contables, nóminas y recursos humanos, especialista en trámites fiscales y de seguridad social.",
+      "Es Licenciado en Contaduría Pública por la Escuela Profesional de Comercio y Administración, incorporada a la Universidad de Guanajuato, obteniendo su titulación mediante Examen General de Calidad Profesional. Cuenta con estudios de Maestría en Fiscal, con titulación por promedio académico.",
+      "Tiene más de 22 años de experiencia como docente en la Universidad de Estudios Profesionales de Ciencias y Artes en materias de impuestos, combinando la práctica profesional con la formación académica especializada.",
+      "Ha fortalecido su desarrollo mediante diplomados especializados y cursos de actualización fiscal. A lo largo de su trayectoria ha participado en asesorías y cálculos de impuestos para importantes grupos empresariales de los sectores asegurador, construcción, gasolinerías, entre otros.",
+    ],
   },
   {
-    nombre: "Victor",
-    rol: "Rocha Leos Consultores",
-    iniciales: "V",
-    descripcion:
-      "Perfil en desarrollo. Proximamente se agregara el nombre completo, especialidad y trayectoria profesional.",
+    nombre: "Mtro., C.P.C., P.C. y C.yA.G. Víctor Raúl Hernández Moreno",
+    rol: "Socio de Auditoría Financiera, Fiscal, Forense y Gubernamental",
+    foto: "/home-imgs/perfiles/victor.jpeg",
+    descripcion: [
+      "Contador Público Certificado con más de veintiocho años de experiencia profesional en auditoría financiera, fiscal, forense y gubernamental, especializado en evaluación de riesgos, control interno, gobierno corporativo, cumplimiento regulatorio y aseguramiento.",
+      "Es Licenciado en Contaduría Pública por la Escuela Profesional de Comercio y Administración, incorporada a la Universidad de Guanajuato, obteniendo su titulación mediante Examen General de Calidad Profesional. Cuenta con maestrías en Fiscal y en Contabilidad y Auditoría Gubernamental.",
+      "Posee la Certificación Profesional del Instituto Mexicano de Contadores Públicos (IMCP), así como la Certificación en Contabilidad y Auditoría Gubernamental, acreditando competencias en auditoría, fiscalización, control interno y rendición de cuentas.",
+      "Ha colaborado en firmas como Deloitte México, Plascencia Pérez Consultores y Elías Navarro. A lo largo de su trayectoria ha dirigido auditorías financieras, fiscales y forenses para grupos empresariales de los sectores manufacturero, automotriz, hotelero, inmobiliario, comercial y agroindustrial, entre otros.",
+    ],
   },
 ];
 
@@ -38,14 +46,30 @@ export function PerfilesRochaLeos() {
           {perfiles.map((perfil) => (
             <article
               key={perfil.nombre}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.07] md:p-8"
+              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.07] md:p-8"
             >
-              <div className="flex items-start gap-5">
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-[#BFC5CA] text-3xl font-bold text-[#0e1a2b] shadow-xl">
-                  {perfil.iniciales}
-                </div>
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+                {perfil.foto ? (
+                  <img
+                    src={perfil.foto}
+                    alt={`Foto de perfil de ${perfil.nombre}`}
+                    className="h-42 w-36 shrink-0 rounded-2xl border border-white/15 object-cover shadow-xl"
+                  />
+                ) : (
+                  <div
+                    role="img"
+                    aria-label={`Foto de perfil pendiente de ${perfil.nombre}`}
+                    className="relative flex h-36 w-36 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-[#BFC5CA] shadow-xl"
+                  >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,0.55),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.25),rgba(14,26,43,0.12))]" />
+                    <div className="relative mt-4 flex h-24 w-24 flex-col items-center justify-end overflow-hidden rounded-full bg-[#0e1a2b]/15">
+                      <div className="mb-2 h-9 w-9 rounded-full bg-[#0e1a2b]/45" />
+                      <div className="h-12 w-20 rounded-t-full bg-[#0e1a2b]/45" />
+                    </div>
+                  </div>
+                )}
 
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#BFC5CA]">
                     {perfil.rol}
                   </p>
@@ -55,9 +79,11 @@ export function PerfilesRochaLeos() {
                 </div>
               </div>
 
-              <p className="mt-8 text-base leading-relaxed text-[#BFC5CA]">
-                {perfil.descripcion}
-              </p>
+              <div className="mt-8 space-y-4 text-base leading-relaxed text-[#BFC5CA]">
+                {perfil.descripcion.map((parrafo) => (
+                  <p key={parrafo}>{parrafo}</p>
+                ))}
+              </div>
 
               <div className="pointer-events-none absolute -bottom-16 -right-16 h-40 w-40 rounded-full border border-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </article>
