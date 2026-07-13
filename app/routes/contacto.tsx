@@ -14,6 +14,38 @@ export type ContactActionData = {
 };
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const allowedInterests = new Set([
+  "Contabilidad general",
+  "Asesoria fiscal",
+  "Auditoria integral",
+  "Nomina y RH",
+  "Compliance fiscal",
+  "Tramites ante autoridades",
+]);
+
+function sanitizeText(value: FormDataEntryValue | null, maxLength: number) {
+  return String(value || "")
+    .normalize("NFKC")
+    .replace(/[\u0000-\u001F\u007F]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function sanitizeMessage(value: FormDataEntryValue | null, maxLength: number) {
+  return String(value || "")
+    .normalize("NFKC")
+    .replace(/\r\n?/g, "\n")
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, " ")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function sanitizeEmail(value: FormDataEntryValue | null) {
+  return sanitizeText(value, 254).toLowerCase();
+}
 
 function escapeHtml(value: string) {
   return value
@@ -26,11 +58,14 @@ function escapeHtml(value: string) {
 
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
-  const name = String(formData.get("name") || "").trim();
-  const email = String(formData.get("email") || "").trim();
-  const message = String(formData.get("message") || "").trim();
-  const interests = formData.getAll("interests").map(String);
-  const company = String(formData.get("company") || "").trim();
+  const name = sanitizeText(formData.get("name"), 100);
+  const email = sanitizeEmail(formData.get("email"));
+  const message = sanitizeMessage(formData.get("message"), 2000);
+  const interests = formData
+    .getAll("interests")
+    .map((interest) => sanitizeText(interest, 80))
+    .filter((interest) => allowedInterests.has(interest));
+  const company = sanitizeText(formData.get("company"), 100);
 
   if (company) {
     return { ok: true, message: "Mensaje enviado correctamente." };
