@@ -1,89 +1,58 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { useState } from 'react';
+import { Form, Link, useNavigation } from 'react-router';
 import { FaEnvelope, FaPlus } from 'react-icons/fa';
+import type { ContactActionData } from '../../routes/contacto';
 
-const ContactComponent = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    interests: [] as string[],
-  });
+const interests = [
+  { value: 'contabilidad', label: 'Contabilidad general' },
+  { value: 'asesoria-fiscal', label: 'Asesoria fiscal' },
+  { value: 'auditoria', label: 'Auditoria integral' },
+  { value: 'nomina-rh', label: 'Nomina y RH' },
+  { value: 'compliance-fiscal', label: 'Compliance fiscal' },
+  { value: 'tramites-autoridades', label: 'Tramites ante autoridades' },
+];
 
+const faqItems = [
+  {
+    question: 'Que servicios ofrece Rocha Leos Consultores?',
+    answer:
+      'Acompanamos a tu empresa en contabilidad general, asesoria fiscal, auditoria integral, nomina y recursos humanos, compliance fiscal y tramites ante autoridades. Disenamos soluciones a la medida de tu operacion.',
+  },
+  {
+    question: 'Con que tipo de empresas trabajan?',
+    answer:
+      'Trabajamos con empresas de diferentes tamanos y giros: desde negocios familiares hasta grupos empresariales con presencia regional. Nuestro enfoque es entender tu contexto para ofrecerte soluciones practicas y alineadas a la normatividad vigente.',
+  },
+  {
+    question: 'Como es el proceso de inicio de servicios?',
+    answer:
+      'Comenzamos con un diagnostico de tu situacion contable y fiscal, identificamos riesgos y oportunidades, y a partir de ahi planteamos una propuesta clara de servicios, alcances y tiempos. Durante todo el proceso mantenemos comunicacion cercana con tu equipo.',
+  },
+  {
+    question: 'Ofrecen acompanamiento ante auditorias o requerimientos?',
+    answer:
+      'Si. Te apoyamos en la preparacion, atencion y seguimiento de auditorias fiscales, revisiones del SAT y otras autoridades. Nuestro objetivo es brindarte tranquilidad y certidumbre juridica en todo momento.',
+  },
+  {
+    question: 'Pueden trabajar con mi equipo interno de contabilidad?',
+    answer:
+      'Por supuesto. Podemos integrarnos como soporte externo especializado, revisando procesos, detectando areas de mejora y trabajando de la mano con tu equipo interno para fortalecer el control y el cumplimiento.',
+  },
+];
+
+const ContactComponent = ({
+  actionData,
+}: {
+  actionData?: ContactActionData;
+}) => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleCheckboxChange = (value: string) => {
-    setFormData({
-      ...formData,
-      interests: formData.interests.includes(value)
-        ? formData.interests.filter((i) => i !== value)
-        : [...formData.interests, value],
-    });
-  };
-
-  const handleSubmit = () => {
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      alert('Completa nombre, correo y mensaje antes de enviar.');
-      return;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      alert('Ingresa un correo electronico valido.');
-      return;
-    }
-
-    alert('Mensaje enviado correctamente. Nos pondremos en contacto contigo.');
-    setFormData({
-      name: '',
-      email: '',
-      message: '',
-      interests: [],
-    });
-  };
-
-  const faqItems = [
-    {
-      question: '¿Qué servicios ofrece Rocha Leos Consultores?',
-      answer:
-        'Acompañamos a tu empresa en contabilidad general, asesoría fiscal, auditoría integral, nómina y recursos humanos, compliance fiscal y trámites ante autoridades. Diseñamos soluciones a la medida de tu operación.',
-    },
-    {
-      question: '¿Con qué tipo de empresas trabajan?',
-      answer:
-        'Trabajamos con empresas de diferentes tamaños y giros: desde negocios familiares hasta grupos empresariales con presencia regional. Nuestro enfoque es entender tu contexto para ofrecerte soluciones prácticas y alineadas a la normatividad vigente.',
-    },
-    {
-      question: '¿Cómo es el proceso de inicio de servicios?',
-      answer:
-        'Comenzamos con un diagnóstico de tu situación contable y fiscal, identificamos riesgos y oportunidades, y a partir de ahí planteamos una propuesta clara de servicios, alcances y tiempos. Durante todo el proceso mantenemos comunicación cercana con tu equipo.',
-    },
-    {
-      question: '¿Ofrecen acompañamiento ante auditorías o requerimientos?',
-      answer:
-        'Sí. Te apoyamos en la preparación, atención y seguimiento de auditorías fiscales, revisiones del SAT y otras autoridades. Nuestro objetivo es brindarte tranquilidad y certidumbre jurídica en todo momento.',
-    },
-    {
-      question: '¿Pueden trabajar con mi equipo interno de contabilidad?',
-      answer:
-        'Por supuesto. Podemos integrarnos como soporte externo especializado, revisando procesos, detectando áreas de mejora y trabajando de la mano con tu equipo interno para fortalecer el control y el cumplimiento.',
-    },
-  ];
 
   return (
     <div className="bg-[#BFC5CA] min-h-screen px-4 md:px-8 py-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Sección izquierda */}
         <div className="bg-gradient-to-br from-[#0e1a2b] to-[#1F3A5F] p-8 rounded-2xl shadow-sm border border-[#0e1a2b]">
-          {/* Encabezado */}
           <div className="mb-8 pb-8 border-b border-[#BFC5CA]/20">
             <p className="text-[#BFC5CA] text-sm font-medium mb-2 uppercase tracking-wider">
               Contacto
@@ -93,7 +62,6 @@ const ContactComponent = () => {
             </h1>
           </div>
 
-          {/* Datos de contacto */}
           <div className="mb-8 pb-8 border-b border-[#BFC5CA]/20">
             <div className="flex items-start gap-3">
               <div className="bg-[#FCFEFE] p-2 rounded-lg">
@@ -101,7 +69,7 @@ const ContactComponent = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-[#FCFEFE] mb-2">
-                  ¿Cómo podemos ayudarte?
+                  Como podemos ayudarte?
                 </h3>
                 <p className="text-sm text-[#BFC5CA]">
                   contacto@rochaleosconsultores.com
@@ -110,7 +78,6 @@ const ContactComponent = () => {
             </div>
           </div>
 
-          {/* Sección de FAQ */}
           <div>
             <h2 className="text-3xl font-bold text-[#FCFEFE] mb-6">
               Preguntas frecuentes
@@ -118,10 +85,11 @@ const ContactComponent = () => {
             <div className="space-y-3">
               {faqItems.map((item, index) => (
                 <div
-                  key={index}
+                  key={item.question}
                   className="border-b border-[#BFC5CA] last:border-0 overflow-hidden"
                 >
                   <button
+                    type="button"
                     onClick={() =>
                       setExpandedFaq(expandedFaq === index ? null : index)
                     }
@@ -151,7 +119,6 @@ const ContactComponent = () => {
           </div>
         </div>
 
-        {/* Sección derecha - Formulario de contacto */}
         <div className="bg-gradient-to-br from-[#0e1a2b] to-[#1F3A5F] p-8 rounded-2xl shadow-sm border border-[#0e1a2b]">
           <div className="flex items-center gap-2 mb-6">
             <h2 className="text-2xl font-bold text-[#FCFEFE]">
@@ -161,7 +128,7 @@ const ContactComponent = () => {
 
           <div className="space-y-6">
             <div>
-              <p className="text-[#BFC5CA] text-sm mb-3">Escríbenos a</p>
+              <p className="text-[#BFC5CA] text-sm mb-3">Escribenos a</p>
               <p className="text-[#FCFEFE] font-semibold mb-4">
                 contacto@rochaleosconsultores.com
               </p>
@@ -183,94 +150,123 @@ const ContactComponent = () => {
 
             <div className="border-t border-[#BFC5CA] pt-6">
               <p className="text-[#BFC5CA] text-sm mb-4">
-                Cuéntanos brevemente qué necesitas
+                Cuentanos brevemente que necesitas
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="text-[#FCFEFE] text-sm mb-2 block">
-                    Nombre completo
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Nombre completo"
-                    className="w-full bg-[#FCFEFE] border border-[#BFC5CA] rounded-lg px-4 py-3 text-[#2E2E2E] placeholder-[#BFC5CA] focus:outline-none focus:border-[#1F3A5F] focus:bg-white"
-                  />
-                </div>
-                <div>
-                  <label className="text-[#FCFEFE] text-sm mb-2 block">
-                    Correo electrónico
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="correo@empresa.com"
-                    className="w-full bg-[#FCFEFE] border border-[#BFC5CA] rounded-lg px-4 py-3 text-[#2E2E2E] placeholder-[#BFC5CA] focus:outline-none focus:border-[#1F3A5F] focus:bg-white"
-                  />
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <label className="text-[#FCFEFE] text-sm mb-2 block">
-                  Describe brevemente tu situación
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  placeholder="Por ejemplo: necesito apoyo con la contabilidad mensual, revisión fiscal o trámites ante autoridades."
-                  rows={4}
-                  className="w-full bg-[#FCFEFE] border border-[#BFC5CA] rounded-lg px-4 py-3 text-[#2E2E2E] placeholder-[#BFC5CA] focus:outline-none focus:border-[#1F3A5F] focus:bg-white resize-none"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="text-[#FCFEFE] text-sm mb-3 block">
-                  Estoy interesado en...
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { value: 'contabilidad', label: 'Contabilidad general' },
-                    { value: 'asesoria-fiscal', label: 'Asesoría fiscal' },
-                    { value: 'auditoria', label: 'Auditoría integral' },
-                    { value: 'nomina-rh', label: 'Nómina y RH' },
-                    {
-                      value: 'compliance-fiscal',
-                      label: 'Compliance fiscal',
-                    },
-                    {
-                      value: 'tramites-autoridades',
-                      label: 'Trámites ante autoridades',
-                    },
-                  ].map((option) => (
-                    <label
-                      key={option.value}
-                      className="flex items-center gap-2 text-[#FCFEFE] text-sm cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={formData.interests.includes(option.value)}
-                        onChange={() => handleCheckboxChange(option.value)}
-                        className="w-4 h-4 bg-white border-[#BFC5CA] rounded accent-[#1F3A5F]"
-                      />
-                      {option.label}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="w-full bg-[#1F3A5F] hover:bg-[#0e1a2b] text-[#FCFEFE] font-semibold py-3 rounded-lg transition-colors"
+              <Form
+                key={actionData?.ok ? actionData.formKey : 'contact-form'}
+                method="post"
+                className="space-y-4"
               >
-                Enviar mensaje
-              </button>
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[#FCFEFE] text-sm mb-2 block">
+                      Nombre completo
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Nombre completo"
+                      required
+                      autoComplete="name"
+                      className="w-full bg-[#FCFEFE] border border-[#BFC5CA] rounded-lg px-4 py-3 text-[#2E2E2E] placeholder-[#BFC5CA] focus:outline-none focus:border-[#1F3A5F] focus:bg-white"
+                    />
+                    {actionData?.fieldErrors?.name ? (
+                      <p className="mt-2 text-sm text-red-200">
+                        {actionData.fieldErrors.name}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  <div>
+                    <label className="text-[#FCFEFE] text-sm mb-2 block">
+                      Correo electronico
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="correo@empresa.com"
+                      required
+                      autoComplete="email"
+                      className="w-full bg-[#FCFEFE] border border-[#BFC5CA] rounded-lg px-4 py-3 text-[#2E2E2E] placeholder-[#BFC5CA] focus:outline-none focus:border-[#1F3A5F] focus:bg-white"
+                    />
+                    {actionData?.fieldErrors?.email ? (
+                      <p className="mt-2 text-sm text-red-200">
+                        {actionData.fieldErrors.email}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[#FCFEFE] text-sm mb-2 block">
+                    Describe brevemente tu situacion
+                  </label>
+                  <textarea
+                    name="message"
+                    placeholder="Por ejemplo: necesito apoyo con la contabilidad mensual, revision fiscal o tramites ante autoridades."
+                    rows={4}
+                    required
+                    className="w-full bg-[#FCFEFE] border border-[#BFC5CA] rounded-lg px-4 py-3 text-[#2E2E2E] placeholder-[#BFC5CA] focus:outline-none focus:border-[#1F3A5F] focus:bg-white resize-none"
+                  />
+                  {actionData?.fieldErrors?.message ? (
+                    <p className="mt-2 text-sm text-red-200">
+                      {actionData.fieldErrors.message}
+                    </p>
+                  ) : null}
+                </div>
+
+                <div>
+                  <label className="text-[#FCFEFE] text-sm mb-3 block">
+                    Estoy interesado en...
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {interests.map((option) => (
+                      <label
+                        key={option.value}
+                        className="flex items-center gap-2 text-[#FCFEFE] text-sm cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          name="interests"
+                          value={option.label}
+                          className="w-4 h-4 bg-white border-[#BFC5CA] rounded accent-[#1F3A5F]"
+                        />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {actionData?.message ? (
+                  <p
+                    className={`rounded-lg px-4 py-3 text-sm ${
+                      actionData.ok
+                        ? 'bg-green-100 text-green-900'
+                        : 'bg-red-100 text-red-900'
+                    }`}
+                  >
+                    {actionData.message}
+                  </p>
+                ) : null}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#1F3A5F] hover:bg-[#0e1a2b] disabled:cursor-not-allowed disabled:opacity-70 text-[#FCFEFE] font-semibold py-3 rounded-lg transition-colors"
+                >
+                  {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
+                </button>
+              </Form>
             </div>
           </div>
         </div>
