@@ -155,6 +155,7 @@ const ContactComponent = ({
 
               <Form
                 key={actionData?.ok ? actionData.formKey : 'contact-form'}
+                action="/contacto"
                 method="post"
                 className="space-y-4"
               >
