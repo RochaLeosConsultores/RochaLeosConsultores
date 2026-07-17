@@ -11,7 +11,7 @@ const perfiles = [
     ],
   },
   {
-    nombre: "Mtro., C.P.C., P.C. y C.yA.G. Víctor Raúl Hernández Moreno",
+    nombre: "Mtro., C.P.C. y P.C., CyAG. Víctor Raúl Hernández Moreno",
     rol: "Socio de Auditoría Financiera, Fiscal, Forense y Gubernamental",
     foto: "/home-imgs/perfiles/victor.jpeg",
     descripcion: [
