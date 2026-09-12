@@ -39,43 +39,6 @@ export function EquipoMultidisciplinario() {
           </div>
         </div>
 
-        {/* Imagen grande tipo banner */}
-        <div
-          className="mb-12 md:mb-16 lg:mb-20"
-        >
-          <div className="relative w-full aspect-[16/6] md:aspect-[16/5] rounded-2xl overflow-hidden shadow-xl border border-[#BFC5CA]/20">
-            {/* Placeholder de imagen - reemplazar con imagen real */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1F3A5F]/10 via-[#BFC5CA]/20 to-[#FCFEFE] flex items-center justify-center">
-              <div className="text-center p-8">
-                <svg 
-                  className="w-24 h-24 mx-auto text-[#1F3A5F]/30 mb-4" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={1.5} 
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" 
-                  />
-                </svg>
-                <p className="text-[#1F3A5F]/40 text-sm font-medium">
-                  Imagen institucional del equipo
-                </p>
-              </div>
-            </div>
-            {/* 
-              Reemplazar el div anterior con una imagen real:
-              <img 
-                src="/nosotros-imgs/equipo-multidisciplinario.jpg" 
-                alt="Equipo multidisciplinario de Rocha Leos Consultores" 
-                className="w-full h-full object-cover"
-              />
-            */}
-          </div>
-        </div>
-
         {/* Grid de aspectos clave en 2 columnas */}
         <div
           className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto"
